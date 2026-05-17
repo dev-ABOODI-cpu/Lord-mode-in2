@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LORD HOST | استضافة عالمية احترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 40%, rgba(255, 215, 0, 0.15), transparent 70%),
+                        repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.02) 0px, rgba(255, 215, 0, 0.02) 1px, transparent 1px, transparent 20px);
+        }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 80px 200px, #ffd700, rgba(0,0,0,0));
+            background-repeat: no-repeat;
+            background-size: 200px 200px, 300px 300px;
+            opacity: 0.4;
+            animation: starsMove 60s linear infinite;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #ffd700;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ffd700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #ffd700;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 85vh;
+            padding: 0 8%;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .hero-badge {
+            background: rgba(255, 215, 0, 0.15);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 span {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-content p {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 550px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: #000;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .stat-item h3 {
+            font-size: 1.8rem;
+            color: #ffd700;
+        }
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-image i {
+            font-size: 15rem;
+            color: rgba(255, 215, 0, 0.2);
+        }
+        .plans-section {
+            padding: 80px 8%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        .section-sub {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 50px;
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .plan-card {
+            background: rgba(15, 15, 25, 0.9);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 30px;
+            padding: 35px 25px;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .plan-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        .plan-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        .plan-price span {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        .plan-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .plan-features li {
+            padding: 8px 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .plan-features i {
+            color: #ffd700;
+            margin-left: 8px;
+        }
+        .features-section {
+            padding: 80px 8%;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: rgba(15, 15, 25, 0.6);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        .feature-card:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: scale(1.02);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        .footer {
+            background: #000;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            color: #888;
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 50px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-bg"></div>
+    <div class="stars"></div>
+
+    <div class="navbar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-globe-asia"></i></div>
+            <span class="logo-text">LORD HOST</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#plans">الخطط</a>
+            <a href="#features">المميزات</a>
+            <a href="/login" class="btn-outline">دخول</a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-crown"></i> استضافة عالمية بمعايير احترافية</div>
+            <h1>منصة <span>LORD HOST</span><br>حيث تتحول أفكارك إلى واقع</h1>
+            <p>استضافة سحابية فائقة السرعة مع دعم كامل لـ Python، Node.js، وأكثر. استمتع بأداء خارق وأمان لا يُخترق.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="window.location.href='/login'">🚀 ابدأ الآن مجاناً</button>
+                <button class="btn-outline" onclick="window.location.href='#plans'">📊 اكتشف الخطط</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><h3>+500</h3><span>سيرفر نشط</span></div>
+                <div class="stat-item"><h3>99.9%</h3><span>وقت تشغيل</span></div>
+                <div class="stat-item"><h3>24/7</h3><span>دعم فني</span></div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+    </div>
+
+    <div class="plans-section" id="plans">
+        <h2 class="section-title">خطط <span style="color:#ffd700;">استضافة تناسب الجميع</span></h2>
+        <p class="section-sub">اختر الخطة المناسبة لاحتياجاتك واستمتع بأداء فائق</p>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-icon"><i class="fas fa-star"></i></div>
+                <div class="plan-name">أساسية</div>
+                <div class="plan-price">0$ <span>/ شهرياً</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> 5 سيرفرات</li>
+                    <li><i class="fas fa-check-circle"></i> 100 GB تخزين</li>
+                    <li><i class="fas fa-check-circle"></i> 512 MB رام</li>
+                    <li><i class="fas fa-check-circle"></i> دعم Python</li>
+                    <li><i class="fas fa-check-circle"></i> SSL مجاني</li>
+                </ul>
+                <button class="btn-outline" onclick="window.location.href='/login'">ابدأ مجاناً</button>
+            </div>
+            <div class="plan-card">
+                <div class="plan-icon"><i class="fas fa-gem"></i></div>
+                <div class="plan-name">احترافية</div>
+                <div class="plan-price">9.99$ <span>/ شهرياً</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> 15 سيرفر</li>
+                    <li><i class="fas fa-check-circle"></i> 500 GB تخزين</li>
+                    <li><i class="fas fa-check-circle"></i> 2 GB رام</li>
+                    <li><i class="fas fa-check-circle"></i> دعم Python + Node.js</li>
+                    <li><i class="fas fa-check-circle"></i> نطاق مخصص</li>
+                </ul>
+                <button class="btn-primary" onclick="window.location.href='/login'">اشترك الآن</button>
+            </div>
+            <div class="plan-card">
+                <div class="plan-icon"><i class="fas fa-crown"></i></div>
+                <div class="plan-name">أسطورية</div>
+                <div class="plan-price">24.99$ <span>/ شهرياً</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> 30 سيرفر</li>
+                    <li><i class="fas fa-check-circle"></i> 2 TB تخزين</li>
+                    <li><i class="fas fa-check-circle"></i> 8 GB رام</li>
+                    <li><i class="fas fa-check-circle"></i> أولوية الدعم</li>
+                    <li><i class="fas fa-check-circle"></i> حماية DDoS</li>
+                </ul>
+                <button class="btn-outline" onclick="window.location.href='/login'">تواصل معنا</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section" id="features">
+        <h2 class="section-title">لماذا <span style="color:#ffd700;">LORD HOST</span>؟</h2>
+        <p class="section-sub">نقدم لك تجربة استضافة استثنائية بميزات لا تُضاهى</p>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div><h3>سرعة فائقة</h3><p>أحدث معالجات Intel Xeon و NVMe SSD لتجربة فائقة السرعة.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-headset"></i></div><h3>دعم فني 24/7</h3><p>فريق دعم متخصص لحل مشاكلك في أي وقت.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>حماية متطورة</h3><p>حماية من هجمات DDoS وجدران نارية متقدمة.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-code"></i></div><h3>دعم كامل للمطورين</h3><p>Python، Node.js، وإمكانية تخصيص البيئة بالكامل.</p></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 LORD HOST - الاستضافة العالمية. جميع الحقوق محفوظة.</p>
+        <p>تم التطوير بواسطة <span style="color:#ffd700;">LORD</span></p>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

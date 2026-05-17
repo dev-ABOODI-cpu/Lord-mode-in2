@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title> 𝙻𝙾𝚁𝙳 𝙼𝙾𝙳𝙴 | تسجيل الدخول - منصة استضافة احترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #000000;
+            color: #eef2ff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* خلفية ذهبية متحركة */
+        .bg-security {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 30%, rgba(255, 215, 0, 0.08), transparent 70%),
+                        repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.02) 0px, rgba(255, 215, 0, 0.02) 2px, transparent 2px, transparent 10px);
+            z-index: -2;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        /* جزيئات ذهبية متحركة */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(40px);
+                opacity: 0;
+            }
+        }
+
+        /* شاشة التحميل */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 215, 0, 0.2);
+            border-top-color: #FFD700;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* حاوية تسجيل الدخول */
+        .login-wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* بطاقة تسجيل الدخول */
+        .login-card {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 32px;
+            padding: 42px 38px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.1) inset;
+            transition: all 0.3s ease;
+        }
+
+        .login-card:hover {
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+        }
+
+        /* الشعار */
+        .brand {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .brand-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #000000, #0a0a0a);
+            border: 1.5px solid rgba(255, 215, 0, 0.6);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #FFD700;
+            margin: 0 auto 18px;
+            box-shadow: 0 0 28px rgba(255, 215, 0, 0.3), 0 0 60px rgba(255, 215, 0, 0.1);
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
+            color: #6b7aaa;
+            margin-top: 8px;
+        }
+
+        /* التبويبات */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 60px;
+            padding: 4px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 50px;
+            border: none;
+            background: none;
+            color: #9ca3cf;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn i {
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            box-shadow: 0 4px 14px rgba(255, 215, 0, 0.4);
+        }
+
+        /* التنبيهات */
+        .alert {
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: alertIn 0.3s ease;
+        }
+
+        @keyframes alertIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert.error {
+            background: rgba(255, 61, 90, 0.12);
+            border: 1px solid rgba(255, 61, 90, 0.4);
+            color: #ff7a94;
+        }
+
+        .alert.success {
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #FFD700;
+        }
+
+        .alert.show {
+            display: flex;
+        }
+
+        /* حقول الإدخال */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            color: #9ca3cf;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px 14px 48px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            color: #eef2ff;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.05);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #4b556b;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4b556b;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .form-input:focus + .input-icon {
+            color: #FFD700;
+        }
+
+        /* زر الإرسال */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: none;
+            border-radius: 16px;
+            color: #000000;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(255, 215, 0, 0.55);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* سبينر صغير */
+        .btn-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-top-color: #000000;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+
+        /* الفاصل */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+            color: #4b556b;
+            font-size: 0.7rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        /* زر تيليجرام */
+        .telegram-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 136, 204, 0.1);
+            border: 1px solid rgba(0, 136, 204, 0.3);
+            border-radius: 16px;
+            color: #29b5e8;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .telegram-btn:hover {
+            background: rgba(0, 136, 204, 0.2);
+            border-color: rgba(0, 136, 204, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* معلومات الخطة المجانية */
+        .plan-info {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .plan-info h4 {
+            color: #FFD700;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+        }
+
+        .plan-info p {
+            font-size: 0.7rem;
+            color: #9ca3cf;
+            line-height: 1.6;
+        }
+
+        /* تذييل */
+        .footer-note {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.7rem;
+            color: #4b556b;
+        }
+
+        .footer-note a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 520px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+            
+            .brand-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 1.8rem;
+            }
+            
+            .brand-name {
+                font-size: 1.3rem;
+            }
+            
+            .tab-btn {
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+            
+            .form-input {
+                padding: 12px 16px 12px 42px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-security"></div>
+<div class="bg-grid"></div>
+<div class="particles" id="particles"></div>
+
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+</div>
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-globe-asia"></i>
+            </div>
+            <div class="brand-name">𝙻𝙾𝚁𝙳 𝙼𝙾𝙳𝙴</div>
+            <div class="brand-sub">منصة استضافة احترافية - استمتع بأداء فائق</div>
+        </div>
+
+        <!-- التبويبات -->
+        <div class="tabs">
+            <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
+            <button class="tab-btn" id="registerTabBtn" onclick="switchTab('register')">
+                <i class="fas fa-user-plus"></i> حساب جديد
+            </button>
+        </div>
+
+        <!-- التنبيه -->
+        <div class="alert" id="alertBox">
+            <i class="fas fa-exclamation-circle" id="alertIcon"></i>
+            <span id="alertMessage"></span>
+        </div>
+
+        <!-- نموذج تسجيل الدخول -->
+        <div id="loginForm">
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <div class="input-wrapper">
+                    <input type="email" class="form-input" id="loginEmail" placeholder="movghhjkfjbifj@gmail.com" autocomplete="email">
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <div class="input-wrapper">
+                    <input type="password" class="form-input" id="loginPassword" placeholder="mohmmedahmed" autocomplete="current-password">
+                    <i class="fas fa-lock input-icon"></i>
+                </div>
+            </div>
+            <button class="submit-btn" id="loginButton" onclick="doLogin()">
+                <span id="loginText"><i class="fas fa-sign-in-alt"></i> دخول</span>
+                <div class="btn-spinner" id="loginSpinner"></div>
+            </button>
+        </div>
+
+        <!-- نموذج التسجيل -->
+        <div id="registerForm" style="display: none;">
+            <div class="plan-info">
+                <h4><i class="fas fa-gift"></i> مميزات الخطة المجانية</h4>
+                <p>✨ 5 سيرفرات | ✨ 100 GB مساحة تخزين | ✨ 512 MB رام | ✨ دعم Python كامل | ✨ SSL مجاني | ✨ دعم فني 24/7</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <div class="input-wrapper">
+                    <input type="email" class="form-input" id="regEmail" placeholder="movghhjkfjbifj@gmail.com" autocomplete="off">
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <div class="input-wrapper">
+                    <input type="password" class="form-input" id="regPassword" placeholder="mohmmedahmed" autocomplete="new-password">
+                    <i class="fas fa-lock input-icon"></i>
+                </div>
+            </div>
+            <button class="submit-btn" id="registerButton" onclick="doRegister()">
+                <span id="registerText"><i class="fas fa-user-plus"></i> إنشاء حساب</span>
+                <div class="btn-spinner" id="registerSpinner"></div>
+            </button>
+
+            <div class="divider">
+                <span>أو تواصل معنا</span>
+            </div>
+            
+            <a href="https://t.me/LO_RD_1" target="_blank" class="telegram-btn">
+                <i class="fab fa-telegram-plane" style="font-size: 1.1rem;"></i>
+                تواصل مع الدعم عبر تليجرام
+            </a>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i> نظام آمن بالكامل |
+            <a href="https://t.me/LO_RD_1" target="_blank">@𝙻𝙾𝚁𝙳</a> |
+            LORD HOST v5
+        </div>
+    </div>
+</div>
+
+<script>
+    // إخفاء شاشة التحميل
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const loader = document.getElementById('loadingScreen');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        }, 500);
+    });
+
+    // إنشاء الجزيئات المتحركة
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (5 + Math.random() * 15) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        particle.style.width = particle.style.height = (1 + Math.random() * 3) + 'px';
+        particle.style.opacity = 0.3 + Math.random() * 0.7;
+        particlesContainer.appendChild(particle);
+    }
+
+    // تبديل التبويبات
+    function switchTab(tab) {
+        clearAlert();
+        
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginTab = document.getElementById('loginTabBtn');
+        const registerTab = document.getElementById('registerTabBtn');
+        
+        if (tab === 'login') {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            loginTab.classList.remove('active');
+            registerTab.classList.add('active');
+        }
+    }
+
+    // عرض التنبيه
+    function showAlert(message, type = 'error') {
+        const alertBox = document.getElementById('alertBox');
+        const alertIcon = document.getElementById('alertIcon');
+        const alertMessage = document.getElementById('alertMessage');
+        
+        alertIcon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+        alertMessage.textContent = message;
+        alertBox.className = `alert ${type} show`;
+        
+        // إخفاء تلقائي بعد 5 ثوان
+        setTimeout(() => {
+            alertBox.classList.remove('show');
+        }, 5000);
+    }
+
+    function clearAlert() {
+        const alertBox = document.getElementById('alertBox');
+        alertBox.classList.remove('show');
+    }
+
+    // تفعيل/تعطيل زر التحميل
+    function setButtonLoading(buttonId, spinnerId, textId, isLoading) {
+        const button = document.getElementById(buttonId);
+        const spinner = document.getElementById(spinnerId);
+        const textSpan = document.getElementById(textId);
+        
+        button.disabled = isLoading;
+        spinner.style.display = isLoading ? 'block' : 'none';
+        if (textSpan) {
+            if (isLoading) {
+                textSpan.style.display = 'none';
+            } else {
+                textSpan.style.display = 'inline-flex';
+            }
+        }
+    }
+
+    // تسجيل الدخول
+    async function doLogin() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value.trim();
+        
+        if (!email || !password) {
+            showAlert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
+            return;
+        }
+        
+        clearAlert();
+        setButtonLoading('loginButton', 'loginSpinner', 'loginText', true);
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                showAlert('✅ تم تسجيل الدخول بنجاح! جاري التحويل...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || '/';
+                }, 800);
+            } else {
+                showAlert(data.message || 'بيانات الدخول غير صحيحة');
+                setButtonLoading('loginButton', 'loginSpinner', 'loginText', false);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showAlert('خطأ في الاتصال بالخادم. تأكد من اتصالك بالإنترنت');
+            setButtonLoading('loginButton', 'loginSpinner', 'loginText', false);
+        }
+    }
+
+    // التسجيل
+    async function doRegister() {
+        const email = document.getElementById('regEmail').value.trim().toLowerCase();
+        const password = document.getElementById('regPassword').value.trim();
+        
+        if (!email || !password) {
+            showAlert('الرجاء إدخال جميع البيانات');
+            return;
+        }
+        
+        if (!email.includes('@') || !email.includes('.')) {
+            showAlert('البريد الإلكتروني غير صالح');
+            return;
+        }
+        
+        if (password.length < 4) {
+            showAlert('كلمة المرور يجب أن تكون 4 أحرف على الأقل');
+            return;
+        }
+        
+        clearAlert();
+        setButtonLoading('registerButton', 'registerSpinner', 'registerText', true);
+        
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                showAlert(data.message || '✅ تم إنشاء حسابك بنجاح! يمكنك تسجيل الدخول الآن.', 'success');
+                
+                // مسح الحقول
+                document.getElementById('regEmail').value = '';
+                document.getElementById('regPassword').value = '';
+                
+                // التحويل إلى تبويب تسجيل الدخول بعد 1.5 ثانية
+                setTimeout(() => {
+                    switchTab('login');
+                    document.getElementById('loginEmail').value = email;
+                    document.getElementById('loginPassword').focus();
+                }, 1500);
+            } else {
+                showAlert(data.message || 'فشل إنشاء الحساب');
+            }
+        } catch (error) {
+            console.error('Register error:', error);
+            showAlert('خطأ في الاتصال بالخادم. تأكد من اتصالك بالإنترنت');
+        } finally {
+            setButtonLoading('registerButton', 'registerSpinner', 'registerText', false);
+        }
+    }
+
+    // الضغط على Enter
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const isLoginVisible = document.getElementById('loginForm').style.display !== 'none';
+            if (isLoginVisible) {
+                doLogin();
+            } else {
+                doRegister();
+            }
+        }
+    });
+
+    // التحقق من الجلسة الحالية
+    fetch('/api/current_user')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.is_admin ? '/admin' : '/dashboard';
+            }
+        })
+        .catch(() => {});
+</script>
+</body>
+</html>
